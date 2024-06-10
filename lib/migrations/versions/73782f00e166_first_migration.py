@@ -17,8 +17,20 @@ depends_on = None
 
 
 def upgrade() -> None:
-    pass
+    op.create_table(
+        'bands',
+        sa.Column('id', sa.Integer(), primary_key=True),
+        sa.Column('name', sa.String(), nullable=True),
+        sa.Column('hometown', sa.String(), nullable=True)
+    )
+    op.create_table(
+        'venues',
+        sa.Column('id', sa.Integer(), primary_key=True),
+        sa.Column('title', sa.String(), nullable=True),
+        sa.Column('city', sa.String(), nullable=True)
+    )
 
 
 def downgrade() -> None:
-    pass
+    op.drop_table('venues')
+    op.drop_table('bands')
